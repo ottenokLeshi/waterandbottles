@@ -19,6 +19,7 @@ module.exports = (redBottles, blueBottles) => {
           bottleNumber: redIndex + 1,
           poured: redBottles[redIndex],
         });
+        redBottles[redIndex] = 0;
         continue redLoop;
       }
 
@@ -46,10 +47,13 @@ module.exports = (redBottles, blueBottles) => {
     }
   }
 
-  try {
-    resultArray = resultArray.map(element => JSON.stringify(element));
-  } catch (err) {
-    throw err;
+  const remains = redBottles.reduce((sum, current) => {
+    return sum + current; 
+  }, 0)
+  
+  if (remains !== 0) {
+    console.log('Объем синих бутылок меньше чем объем красных')
   }
+
   return resultArray;
 };
